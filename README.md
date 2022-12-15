@@ -1,10 +1,9 @@
 # Tugas Akhir PBO
-untuk menjalankan program siapkan database terlebih dahulu
-dengan 
-host : localhost
-user : postgres
-pass : root
-database : DataSekolah
+untuk menjalankan program siapkan database terlebih dahulu dengan config seperti berikut :
+	host : localhost
+	user : postgres
+	pass : root
+	database : DataSekolah
 
 di bawah ini adalah script untuk membuat tabel jika tidak ingin mengimpor file backup database
 
@@ -17,11 +16,11 @@ CREATE TABLE IF NOT EXISTS public.absensi
 (
     tanggal_absen date,
     pegawai_nip numeric,
-    waktu_absen timestamp with time zone,
-    waktu_pulang timestamp with time zone,
+    waktu_absen timestamp without time zone,
+    waktu_pulang timestamp without time zone,
     uid integer NOT NULL DEFAULT nextval('absensi_uid_seq'::regclass),
     status character varying(32) COLLATE pg_catalog."default",
-    img_ijin bytea,
+    img_ijin character varying(256) COLLATE pg_catalog."default",
     CONSTRAINT absensi_pkey PRIMARY KEY (uid)
 );
 
