@@ -34,8 +34,13 @@ namespace AplikasiPBO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string valueDb = akunConfig.HapusAkunDB(Beranda.uid).ToString();
+            string valueDb = akunConfig.HapusAkunDB(Beranda.nip);
             MessageBox.Show(valueDb);
+        }
+
+        private void editProfil_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

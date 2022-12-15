@@ -49,6 +49,7 @@
             this.nama = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.absensiTab = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.dateAkhir = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -260,6 +261,7 @@
             // 
             // absensiTab
             // 
+            this.absensiTab.Controls.Add(this.button1);
             this.absensiTab.Controls.Add(this.dateAkhir);
             this.absensiTab.Controls.Add(this.label4);
             this.absensiTab.Controls.Add(this.label3);
@@ -276,6 +278,16 @@
             this.absensiTab.TabIndex = 0;
             this.absensiTab.Text = "Absensi";
             this.absensiTab.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(320, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Ajukan Ijin";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateAkhir
             // 
@@ -351,12 +363,14 @@
             // 
             // dataGrid
             // 
+            this.dataGrid.AllowUserToAddRows = false;
             this.dataGrid.AllowUserToDeleteRows = false;
             this.dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGrid.Location = new System.Drawing.Point(3, 62);
             this.dataGrid.Name = "dataGrid";
+            this.dataGrid.ReadOnly = true;
             this.dataGrid.RowTemplate.Height = 25;
             this.dataGrid.Size = new System.Drawing.Size(786, 388);
             this.dataGrid.TabIndex = 2;
@@ -434,5 +448,6 @@
         private Label label4;
         private Label label3;
         private DateTimePicker dateAwal;
+        private Button button1;
     }
 }

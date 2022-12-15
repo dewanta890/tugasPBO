@@ -44,7 +44,8 @@ namespace AplikasiPBO
         {
             if (dataGrid.Columns[e.ColumnIndex].Name == "detail_colom")
             {
-                detailAbsensi tambahAbsensi = new detailAbsensi();
+                uid = dataGrid.Rows[e.RowIndex].Cells["uid"].Value.ToString();
+                TambahAbsen tambahAbsensi = new TambahAbsen();
                 tambahAbsensi.Show();
 
             }
@@ -65,8 +66,7 @@ namespace AplikasiPBO
 
         private void button9_Click(object sender, EventArgs e)
         {
-            TambahAbsen tambahAbsensi = new TambahAbsen();
-            tambahAbsensi.Show();
+            getDataDB.TambahAbsenDB(nip);
         }
     }
 }

@@ -121,5 +121,13 @@ namespace AplikasiPBO
  
             rekapAbsensi.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            nip = Login.nip.ToString();
+            MessageBox.Show(nip);
+            Form10 ijin = new Form10();
+            ijin.Show();
+        }
     }
 }

@@ -10,7 +10,8 @@ namespace AplikasiPBO
         {
             InitializeComponent();
             DBhelper start = new DBhelper();
-            start.StartingAdmin();
+            string notif= start.StartingAdmin();
+            MessageBox.Show(notif);
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -182,6 +182,7 @@
             this.Controls.Add(this.label9);
             this.Name = "editProfil";
             this.Text = "Edit Profil";
+            this.Load += new System.EventHandler(this.editProfil_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

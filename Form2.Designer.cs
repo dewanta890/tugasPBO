@@ -44,6 +44,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.absensiGrid = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.absensiTab.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -152,7 +153,6 @@
             // 
             this.dataGrid.AllowUserToAddRows = false;
             this.dataGrid.AllowUserToDeleteRows = false;
-            this.dataGrid.AllowUserToOrderColumns = true;
             this.dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -179,6 +179,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.absensiGrid);
             this.tabPage1.Controls.Add(this.panel1);
@@ -204,7 +205,6 @@
             // 
             this.absensiGrid.AllowUserToAddRows = false;
             this.absensiGrid.AllowUserToDeleteRows = false;
-            this.absensiGrid.AllowUserToOrderColumns = true;
             this.absensiGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.absensiGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.absensiGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -223,6 +223,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(786, 10);
             this.panel1.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(673, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Refresh";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Beranda
             // 
@@ -268,5 +278,6 @@
         private Panel panel1;
         private DataGridView absensiGrid;
         private Label label5;
+        private Button button1;
     }
 }

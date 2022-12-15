@@ -84,7 +84,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGrid);
             this.Name = "Rekap";
-            this.Text = "Form5";
+            this.Text = "Riwayat Absensi";
             this.Load += new System.EventHandler(this.Form5_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.ResumeLayout(false);

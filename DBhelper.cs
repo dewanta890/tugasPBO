@@ -11,6 +11,9 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using Microsoft.EntityFrameworkCore.Storage;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using System.Security.Cryptography;
 
 namespace AplikasiPBO
 {
@@ -23,27 +26,26 @@ namespace AplikasiPBO
             connect.ConnectionString = "Host=localhost; Username=postgres; Password=root; Database=DataSekolah; CommandTimeout=10";
         }
 
-        public void StartingAdmin()
+        public string StartingAdmin()
         {
             ConfigDB();
            
             try
             {
                 connect.Open();
-                NpgsqlCommand query = new NpgsqlCommand();
-                query.Connection = connect;
-                string querySql = "INSERT INTO pegawai( nip, nama_pegawai, tanggal_lahir, no_handphone, email, pass, domisili, jabatan, uid_pegawai) VALUES('0000', 'admin', CURRENT_DATE, '0000', 'email', '0000', '0000', 'admin', default) ON CONFLICT DO NOTHING; ";
-                query.CommandText = querySql;
-                query.CommandType = CommandType.Text;
+                string querySql = "INSERT INTO pegawai( nip, nama_pegawai, tanggal_lahir, no_handphone, email, pass, domisili, jabatan, uid_pegawai) VALUES('1111', 'admin', CURRENT_DATE, '0000', 'email', '1111', '0000', 'admin', default) ON CONFLICT DO NOTHING; ";
+                NpgsqlCommand query = new NpgsqlCommand(querySql, connect);
+                query.ExecuteNonQuery();
                 query.Dispose();
                 connect.Close();
             }
             catch (Exception ex)
             {
-
+                return (ex.ToString());
             }
-            
+            return ("Database Sudah Tersambung");
         }
+
         public DataTable LoginDB( string nip, string pass)
         {
             ConfigDB();
@@ -166,6 +168,32 @@ namespace AplikasiPBO
              return dataread;
         }
 
+        public DataTable ReaderAbsensiDB()
+        {
+            ConfigDB();
+            DataTable dataread = new DataTable();
+
+            try
+            {
+                connect.Open();
+                NpgsqlCommand query = new NpgsqlCommand();
+                query.Connection = connect;
+                string querySql = "SELECT nip, nama_pegawai, uid_pegawai FROM public.pegawai;";
+                query.CommandText = querySql;
+                query.CommandType = CommandType.Text;
+                NpgsqlDataAdapter adapterdata = new NpgsqlDataAdapter(query);
+                adapterdata.Fill(dataread);
+                query.Dispose();
+                connect.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dataread;
+        }
+
         public DataTable ReaderSingleDB(string nip)
         {
             ConfigDB();
@@ -262,6 +290,50 @@ namespace AplikasiPBO
             return "Absensi Telah di Update";
         }
 
+        public string UpdateAbsenAdminDB(string nip, string uid, string tanggal, string absen, string pulang)
+
+        {
+            ConfigDB();
+            try
+            {
+                connect.Open();
+                string querySql = "UPDATE absensi SET tanggal_absen = '"+ tanggal +"' , waktu_pulang = '"+ pulang +"', waktu_absen = '"+ absen +"' WHERE uid = " + uid + " AND pegawai_nip= " + nip + ";";
+                NpgsqlCommand query = new NpgsqlCommand(querySql, connect);
+                query.ExecuteNonQuery();
+                query.Dispose();
+                connect.Close();
+
+            }
+
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            return "Absensi Telah di Update";
+        }
+
+        public string InsertIjinDB(string nip, string tanggal, string status, string ijin)
+
+        {
+            ConfigDB();
+            try
+            {
+                connect.Open();
+                string querySql = "INSERT INTO absensi ( uid, pegawai_nip, tanggal_absen, status, img_ijin) VALUES ( default, " + nip + ", '"+ tanggal +"', '"+ status +"', '"+ ijin +"');";
+                NpgsqlCommand query = new NpgsqlCommand(querySql, connect);
+                query.ExecuteNonQuery();
+                query.Dispose();
+                connect.Close();
+
+            }
+
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            return "Absensi telah Ditambahkan";
+        }
+
         public string UpdateDataProfilDB(string uid, string nama, string noHp, string email, string pass, string tanggal, string domisili, string jabatan)
         {
             ConfigDB();
@@ -292,17 +364,28 @@ namespace AplikasiPBO
             return "Berhasil Update";
         }
 
-        public string HapusAkunDB(string uid)
+        public string HapusAkunDB(string nip)
 
         {
             ConfigDB();
             try
             {
                 connect.Open();
-                string querySql = "DELETE FROM pegawai WHERE uid_pegawai="+uid+" ;";
-                NpgsqlCommand query = new NpgsqlCommand(querySql, connect);
+
+                NpgsqlCommand query = new NpgsqlCommand();
+                query.Connection = connect;
+
+                string querySqlAbsensi = "DELETE FROM absensi WHERE pegawai_nip = " + nip + ";";
+                string querySqlPegawai = "DELETE FROM pegawai WHERE nip = " + nip + ";";
+                
+                query.CommandText = querySqlAbsensi;
                 query.ExecuteNonQuery();
+
+                query.CommandText = querySqlPegawai;
+                query.ExecuteNonQuery();
+                
                 query.Dispose();
+
                 connect.Close();
 
             }

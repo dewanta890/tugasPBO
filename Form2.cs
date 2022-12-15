@@ -40,7 +40,8 @@ namespace AplikasiPBO
             detailButton.HeaderText = "Detail";
             detailButton.Text = "Detail";
 
-            absensiGrid.DataSource = data;
+            var data2 = getDataDB.ReaderAbsensiDB();
+            absensiGrid.DataSource = data2;
             absensiButton.UseColumnTextForButtonValue = true;
             absensiButton.Name = "absensi_detail";
             absensiButton.HeaderText = "Absensi Detail";
@@ -103,6 +104,7 @@ namespace AplikasiPBO
                 pass = dataGrid.Rows[e.RowIndex].Cells["pass"].Value.ToString();
                 domisili = dataGrid.Rows[e.RowIndex].Cells["domisili"].Value.ToString();
                 tanggal = dataGrid.Rows[e.RowIndex].Cells["tanggal_lahir"].Value.ToString();
+                nip = absensiGrid.Rows[e.RowIndex].Cells["nip"].Value.ToString();
                 editProfil akumDetail = new editProfil();
                 akumDetail.Show();
             }
@@ -179,6 +181,11 @@ namespace AplikasiPBO
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            absensiGrid.DataSource = getDataDB.ReaderDB();
         }
     }
 }
